@@ -13,12 +13,15 @@ import java.time.LocalDateTime;
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final OrderService orderService;
 
-    public PaymentService(PaymentRepository paymentRepository) {
+    public PaymentService(PaymentRepository paymentRepository, OrderService orderService) {
         this.paymentRepository = paymentRepository;
+        this.orderService = orderService;
     }
 
-    public Payment processPayment(Order order, PaymentMethod method, String transactionId) {
+    public Payment processPayment(Long orderId, PaymentMethod method, String transactionId) {
+        Order order = orderService.getOrderById(orderId); // Obtiene la Order desde el ID
         Payment payment = new Payment();
         payment.setOrder(order);
         payment.setAmount(order.getOrderAmount());
@@ -30,8 +33,8 @@ public class PaymentService {
         return paymentRepository.save(payment);
     }
 
-    public Payment getPaymentByOrder(Order order) {
-        return paymentRepository.findByOrder(order)
-                .orElseThrow(() -> new PaymentNotFoundException(order.getId()));
+    public Payment getPaymentByOrder(Long orderId) {
+        return paymentRepository.findByOrderId(orderId)
+                .orElseThrow(() -> new PaymentNotFoundException(orderId));
     }
 }
