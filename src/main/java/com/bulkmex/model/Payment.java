@@ -1,14 +1,16 @@
 package com.bulkmex.model;
 
+import com.bulkmex.model.enums.PaymentMethod;
 import com.bulkmex.model.enums.PaymentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
+@Data @Setter
 @Entity
 @Table(name = "payments")
 public class Payment {
@@ -24,6 +26,10 @@ public class Payment {
     @NotNull
     @Column(nullable = false, updatable = false)
     private LocalDateTime date = LocalDateTime.now();
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private PaymentMethod paymentMethod;  // Debe usar el enum PaymentMethod
 
     @NotNull
     @Enumerated(EnumType.STRING)
