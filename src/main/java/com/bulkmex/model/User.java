@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "users")
@@ -36,8 +38,8 @@ public class User {
     @Column(nullable = false)
     private Boolean active = true;
 
-    /*
-        One to many with Order
-     */
+    // Relationships
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders;
 
 }
