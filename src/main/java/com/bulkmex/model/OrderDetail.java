@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 @Table(name = "order_details")
@@ -19,7 +21,7 @@ public class OrderDetail {
 
     @DecimalMin(value = "0.01", message = "Unit price must be positive")
     @Column(nullable = false, precision = 12, scale = 2)
-    private Double unitPrice;
+    private BigDecimal unitPrice;
 
     // Relationships ---------
     @ManyToOne(fetch = FetchType.LAZY)
