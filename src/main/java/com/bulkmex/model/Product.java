@@ -24,7 +24,7 @@ public class Product {
     private String description;
 
     @DecimalMin(value = "0.01", message = "Price must be greater than 0")
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(nullable = false, columnDefinition = "NUMERIC(12,2)")
     private Double price;
 
     @Min(value = 0, message = "Stock cannot be negative")
