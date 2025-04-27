@@ -4,6 +4,8 @@ import com.bulkmex.model.enums.PaymentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,7 +19,7 @@ public class Payment {
 
     @DecimalMin(value = "0.01", message = "Amount must be positive")
     @Column(nullable = false, precision = 12, scale = 2)
-    private Double amount;
+    private BigDecimal amount;
 
     @NotNull
     @Column(nullable = false, updatable = false)
