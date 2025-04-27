@@ -35,4 +35,8 @@ public class User {
     @Column(nullable = false)
     private Boolean active = true;
 
+    /*
+        One to many with Order
+     */
+
 }
