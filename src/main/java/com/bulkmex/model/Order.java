@@ -39,4 +39,10 @@ public class Order {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private PaymentMethod paymentMethod;
+
+    /*
+        Many to one with User
+        One to many with OrderDetail
+     */
+
 }
