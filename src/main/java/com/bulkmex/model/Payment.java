@@ -32,7 +32,9 @@ public class Payment {
     @Column(nullable = false, unique = true, length = 50)
     private String transactionId;
 
+    // Relationships -----------
     @OneToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
+
 }
