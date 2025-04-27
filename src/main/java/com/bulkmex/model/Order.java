@@ -5,6 +5,8 @@ import com.bulkmex.model.enums.PaymentMethod;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class Order {
 
     @DecimalMin(value = "0.01")
     @Column(nullable = false, precision = 12, scale = 2)
-    private Double orderAmount;
+    private BigDecimal orderAmount;
 
     @NotNull
     @Enumerated(EnumType.STRING)
