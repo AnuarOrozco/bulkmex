@@ -21,14 +21,13 @@ public class OrderDetail {
     @Column(nullable = false, precision = 12, scale = 2)
     private Double unitPrice;
 
-    /*
-     * Future relationships (uncomment when ready)
-     * @ManyToOne(fetch = FetchType.LAZY)
-     * @JoinColumn(name = "order_id", nullable = false)
-     * private Order order;
-     *
-     * @ManyToOne(fetch = FetchType.LAZY)
-     * @JoinColumn(name = "product_id", nullable = false)
-     * private Product product;
-     */
+    // Relationships ---------
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
+
 }
