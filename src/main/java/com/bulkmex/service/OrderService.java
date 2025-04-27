@@ -1,5 +1,6 @@
 package com.bulkmex.service;
 
+import com.bulkmex.exception.OrderNotFoundException;
 import com.bulkmex.model.*;
 import com.bulkmex.model.enums.OrderStatus;
 import com.bulkmex.repository.OrderRepository;
@@ -35,7 +36,7 @@ public class OrderService {
 
     public Order getOrderById(Long id) {
         return orderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
+                .orElseThrow(() -> new OrderNotFoundException(id));
     }
 
     public List<Order> getOrdersByUser(Long userId) {
