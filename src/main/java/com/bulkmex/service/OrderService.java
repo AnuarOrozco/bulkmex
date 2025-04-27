@@ -38,8 +38,8 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException("Order not found"));
     }
 
-    public List<Order> getOrdersByUser(User user) {
-        return orderRepository.findByUser(user);
+    public List<Order> getOrdersByUser(Long userId) {
+        return orderRepository.findByUserId(userId);
     }
 
     @Transactional
