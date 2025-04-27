@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -25,7 +26,7 @@ public class Product {
 
     @DecimalMin(value = "0.01", message = "Price must be greater than 0")
     @Column(nullable = false, columnDefinition = "NUMERIC(12,2)")
-    private Double price;
+    private BigDecimal price;
 
     @Min(value = 0, message = "Stock cannot be negative")
     private Integer stock = 0;
