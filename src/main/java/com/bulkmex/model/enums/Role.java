@@ -1,4 +1,4 @@
-package com.bulkmex.model;
+package com.bulkmex.model.enums;
 
 public enum Role {
     CLIENT,

@@ -1,5 +1,7 @@
 package com.bulkmex.model;
 
+import com.bulkmex.model.enums.OrderStatus;
+import com.bulkmex.model.enums.PaymentMethod;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
