@@ -57,4 +57,10 @@ public class Order {
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Payment payment;
 
+    // Método helper para manejar la bidireccionalidad
+    public void addItem(OrderDetail item) {
+        items.add(item);
+        item.setOrder(this);
+    }
+
 }
