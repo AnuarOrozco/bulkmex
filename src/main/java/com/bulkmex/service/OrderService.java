@@ -24,13 +24,25 @@ public class OrderService {
 
     @Transactional
     public Order createOrder(Order order) {
-        // Calcula el total basado en los items
+        // 1. Establece la relación bidireccional con cada item
+        order.getItems().forEach(item -> {
+            item.setOrder(order); // Asegura la relación
+            // Calcula el subtotal si no viene definido
+            if (item.getSubtotal() == null && item.getUnitPrice() != null && item.getQuantity() != null) {
+                item.setSubtotal(item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
+            }
+        });
+
+        // 2. Calcula el total
         BigDecimal total = order.getItems().stream()
-                .map(item -> item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
+                .map(item -> item.getSubtotal() != null ? item.getSubtotal() :
+                        item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         order.setOrderAmount(total);
         order.setOrderStatus(OrderStatus.PENDING);
+
+        // 3. Guarda la orden (la cascada guardará los items)
         return orderRepository.save(order);
     }
 
