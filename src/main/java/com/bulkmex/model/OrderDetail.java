@@ -23,6 +23,10 @@ public class OrderDetail {
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal unitPrice;
 
+    @NotNull
+    @Column(nullable = false, precision = 12, scale = 2)
+    private BigDecimal subtotal;
+
     // Relationships ---------
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
@@ -31,5 +35,14 @@ public class OrderDetail {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
+
+    // Método para calcular el subtotal automáticamente
+    @PrePersist
+    @PreUpdate
+    private void calculateSubtotal() {
+        if (unitPrice != null && quantity != null) {
+            this.subtotal = unitPrice.multiply(BigDecimal.valueOf(quantity));
+        }
+    }
 
 }
